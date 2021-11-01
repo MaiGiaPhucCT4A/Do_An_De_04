@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import model.SanPham;
 //import java.sql.ResultSet;
 //import java.sql.Statement;
@@ -61,8 +63,8 @@ public class SanPham_DAO {
 
             return ps.executeUpdate() > 0;// update data
         } catch (SQLException ex) {
-            Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Lỗi: " + ex);
+            Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NullPointerException n) {
             System.out.println("Lỗi: " + n);
         }
@@ -79,15 +81,15 @@ public class SanPham_DAO {
         } catch (SQLException ex) {
             Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        return false;
     }
 
-    public boolean updateSanPham(SanPham sp) {
+    public void updateSanPham(SanPham sp, String masp) {
         String sql = "update SanPham set TenSP=?, NhaSX=?, LoaiSP=?, "
                 + "SoLuong=?, DonViTinh=?, GiaNhap=?, GiaBan=?, NSX=?, HSD=? "
                 + "where MaSP = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(10, masp);
             ps.setString(1, sp.getTenSP());
             ps.setString(2, sp.getNhaSanXuat());
             ps.setString(3, sp.getLoaiSP());
@@ -97,12 +99,13 @@ public class SanPham_DAO {
             ps.setInt(7, sp.getGiaBan());
             ps.setDate(8, new Date(sp.getNgaySX().getTime()));
             ps.setDate(9, new Date(sp.getHSD().getTime()));
+            int n = ps.executeUpdate();
+
         } catch (SQLException ex) {
             Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NullPointerException n) {
             System.out.println("Lỗi: " + n);
         }
-        return false;
     }
 
     public List<SanPham> getListSanPham() { // đọc ở bảng
@@ -110,7 +113,7 @@ public class SanPham_DAO {
         String sql = "select * from SanPham";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();// dòng đầu tiên trong bảng
+            rs = ps.executeQuery();// dòng đầu tiên trong bảng
             while (rs.next()) { // bộ dữ liệu( dòng tiếp theo)
                 SanPham s = new SanPham();
                 s.setMaSP(rs.getString("MaSP"));// lấy giá trị từ db
@@ -131,6 +134,44 @@ public class SanPham_DAO {
             ex.printStackTrace();
         }
         return listSP;
+    }
+
+    public void initComboBox_TenSanPham(JComboBox<String> combo_TenSP) {
+        String sql = "select * from SanPham";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            combo_TenSP.removeAllItems();
+            while (rs.next()) {
+                combo_TenSP.addItem(rs.getString(2));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(combo_TenSP, ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    public void loadData_SanPham(JComboBox<String> ten_maSP, JComboBox<String> combo_maSP, JComboBox<String> combo_loaiSP,
+            JTextField txtNSX, JTextField txtHSD, JTextField txtSL, JTextField txtGiaBan) {
+        String sql = "select * from SanPham where TenSP = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, ten_maSP.getSelectedItem().toString());
+            rs = ps.executeQuery();
+            combo_maSP.removeAllItems();
+            combo_loaiSP.removeAllItems();
+            while (rs.next()) {
+                combo_maSP.addItem(rs.getString("MaSP").trim());
+                combo_loaiSP.addItem(rs.getString("LoaiSP").trim());
+                txtNSX.setText(rs.getString("NSX").trim());
+                txtHSD.setText(rs.getString("HSD").trim());
+                txtSL.setText(rs.getString("SoLuong").trim());
+                txtGiaBan.setText(rs.getString("GiaBan").trim());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public static void main(String[] args) {

@@ -7,6 +7,7 @@ package view;
 
 import controller.SanPham_DAO;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.SanPham;
 
@@ -41,7 +43,6 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     public SanPhamJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        //menuHome = (MenuFrm) parent;
         test = (MenuFrm) parent;
         this.setLocationRelativeTo(null);
         ListSP = new SanPham_DAO().getListSanPham();
@@ -146,11 +147,17 @@ public class SanPhamJDialog extends javax.swing.JDialog {
 
         jLabel5.setText("HẠN SỬ DỤNG");
 
+        txt_GiaBan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_GiaBanKeyReleased(evt);
+            }
+        });
+
         txtGiaBan.setText("GIÁ BÁN");
 
         jLabel6.setText("SỐ LƯỢNG");
 
-        comboLoaiSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn", "Thực phẩm khô", "Hàng hóa mĩ phẩm", "Đồ dùng văn phòng", "Thẻ cào điện thoại", "Đồ dùng cá nhân", " " }));
+        comboLoaiSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LOẠI SẢN PHẨM", "Thực phẩm khô", "Hàng hóa mĩ phẩm", "Đồ dùng văn phòng", "Thẻ cào điện thoại", "Đồ dùng cá nhân", " " }));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
@@ -167,9 +174,15 @@ public class SanPhamJDialog extends javax.swing.JDialog {
 
         jLabel8.setText("ĐƠN VỊ TÍNH");
 
-        combo_DonViTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 chiếc", "1 gói", "1 thùng", "1 bịch", "1 két", " " }));
+        combo_DonViTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 chiếc", "1 gói", "1 hộp", "1 chai", "1 lon", "1 két", "1 thùng", " " }));
 
         jLabel9.setText("GÍA NHẬP");
+
+        txt_GiaNhap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_GiaNhapKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -332,25 +345,58 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        SanPham sp = new SanPham();
-        String loaisp = comboLoaiSP.getSelectedItem().toString();
-        String donvitinh = combo_DonViTinh.getSelectedItem().toString();
-        String nhasx = combo_NhaSX.getSelectedItem().toString();
 
+        String maSP, tenSP, NhaSX, LoaiSP, DonViTinh;
+        int soLuong;
+        int giaNhap, giaBan;
         boolean isOK = true;
         Date SX = null;
         LocalDate SXKiemtra = null;
         Date SD = null;
         LocalDate SDKiemtra = null;
 
-        sp.setMaSP(txtMaSP.getText());
-        sp.setTenSP(txtTenSP.getText());
-        sp.setNhaSanXuat(nhasx);
-        sp.setLoaiSP(loaisp);
-        sp.setSl(Integer.parseInt(txtSoLuong.getText()));
-        sp.setDonViTinh(donvitinh);
-        sp.setGiaNhap(Integer.parseInt(txt_GiaNhap.getText()));
-        sp.setGiaBan(Integer.parseInt(txt_GiaBan.getText()));
+        maSP = txtMaSP.getText();
+        if (maSP.length() < 1 || maSP.length() > 10) {
+            JOptionPane.showMessageDialog(rootPane, "Mã sản phẩm chưa hợp lệ, từ 3 đến 10 kí tự");
+            return; // nếu sai thì thoát luôn khỏi hàm ko chạy tiếp nữa
+        }
+        tenSP = txtTenSP.getText();
+        if (tenSP.length() == 0 || tenSP.length() > 50) {
+            JOptionPane.showMessageDialog(rootPane, "Tên sản phẩm chưa hợp lệ, từ 3 đến 50 kí tự");
+            return; // nếu sai thì thoát luôn khỏi hàm ko chạy tiếp nữa
+        }
+        NhaSX = combo_NhaSX.getSelectedItem().toString();
+        if (NhaSX.equals("Chọn")) {
+            JOptionPane.showMessageDialog(rootPane, "Hãy chọn nhà sản xuất");
+            return; // nếu sai thì thoát luôn khỏi hàm ko chạy tiếp nữa
+        }
+        LoaiSP = comboLoaiSP.getSelectedItem().toString();
+        if (LoaiSP.equals("LOẠI SẢN PHẨM")) {
+            JOptionPane.showMessageDialog(rootPane, "Hãy chọn loại sản phẩm tương ứng");
+            return; // nếu sai thì thoát luôn khỏi hàm ko chạy tiếp nữa
+        }
+        DonViTinh = combo_DonViTinh.getSelectedItem().toString();
+
+        try {
+            giaNhap = Integer.parseInt(txt_GiaNhap.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Gía nhập phải là số");
+            return;
+        }
+
+        try {
+            giaBan = Integer.parseInt(txt_GiaBan.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Gía bán phải là số");
+            return;
+        }
+
+        try {
+            soLuong = Integer.parseInt(txtSoLuong.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Số lượng phải là số");
+            return;
+        }
 
         String[] nsx = txtNSX.getText().split("/");
         String[] hsd = txtHSD.getText().split("/");
@@ -384,9 +430,8 @@ public class SanPhamJDialog extends javax.swing.JDialog {
             } catch (ParseException ex) {
                 Logger.getLogger(SanPhamJDialog.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sp.setNgaySX(SX);
-            sp.setHSD(SD);
         }
+        SanPham sp = new SanPham(maSP, tenSP, NhaSX, LoaiSP, soLuong, DonViTinh, giaNhap, giaBan, SX, SD);
         if (new SanPham_DAO().addSanPham(sp)) {
             ListSP.add(sp);
             JOptionPane.showMessageDialog(rootPane, "Thêm dữ liệu thành công");
@@ -418,6 +463,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
 
     public void setEditDataSP(SanPham s) {
         txtMaSP.setText(s.getMaSP());
+        txtMaSP.setEditable(false);
         txtTenSP.setText(s.getTenSP());
         txt_GiaBan.setText(String.valueOf(s.getGiaBan()));
         txt_GiaNhap.setText(String.valueOf(s.getGiaNhap()));
@@ -430,7 +476,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     }
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        SanPham sp = new SanPham();
+
         int selectIndex = tblSanPham.getSelectedRow();
         if (selectIndex == -1) {
             JOptionPane.showMessageDialog(rootPane, "Hãy chọn 1 dòng rồi ấn Sửa!");
@@ -441,31 +487,161 @@ public class SanPhamJDialog extends javax.swing.JDialog {
                 return;
             }
 
+            String maSP, tenSP, NhaSX, LoaiSP, DonViTinh;
+            int soLuong;
+            int giaNhap, giaBan;
+            boolean isOK = true;
+            Date SX = null;
+            LocalDate SXKiemtra = null;
+            Date SD = null;
+            LocalDate SDKiemtra = null;
+
+            maSP = txtMaSP.getText();
+            if (maSP.length() < 1 || maSP.length() > 10) {
+                JOptionPane.showMessageDialog(rootPane, "Mã sản phẩm chưa hợp lệ, từ 3 đến 10 kí tự");
+                return; // nếu sai thì thoát luôn khỏi hàm ko chạy tiếp nữa
+            }
+//            for (SanPham a : ListSP) {
+//                if (maSP.equals(a.getMaSP())) {
+//                    JOptionPane.showMessageDialog(rootPane, "Mã sản phẩm bị trùng");
+//                    return;
+//                }
+//            }
+            tenSP = txtTenSP.getText();
+            if (maSP.length() == 0 || maSP.length() > 50) {
+                JOptionPane.showMessageDialog(rootPane, "Tên sản phẩm chưa hợp lệ, từ 3 đến 50 kí tự");
+                return; // nếu sai thì thoát luôn khỏi hàm ko chạy tiếp nữa
+            }
+            NhaSX = combo_NhaSX.getSelectedItem().toString();
+            if (NhaSX.equals("Chọn")) {
+                JOptionPane.showMessageDialog(rootPane, "Hãy chọn nhà sản xuất");
+                return; // nếu sai thì thoát luôn khỏi hàm ko chạy tiếp nữa
+            }
+            LoaiSP = comboLoaiSP.getSelectedItem().toString();
+            if (LoaiSP.equals("LOẠI SẢN PHẨM")) {
+                JOptionPane.showMessageDialog(rootPane, "Hãy chọn loại sản phẩm tương ứng");
+                return; // nếu sai thì thoát luôn khỏi hàm ko chạy tiếp nữa
+            }
+            DonViTinh = combo_DonViTinh.getSelectedItem().toString();
+
+            try {
+                giaNhap = Integer.parseInt(txt_GiaNhap.getText());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, "Gía nhập phải là số");
+                return;
+            }
+
+            try {
+                giaBan = Integer.parseInt(txt_GiaBan.getText());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, "Gía bán phải là số");
+                return;
+            }
+
+            try {
+                soLuong = Integer.parseInt(txtSoLuong.getText());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, "Số lượng phải là số");
+                return;
+            }
+
+            String[] nsx = txtNSX.getText().split("/");
+            String[] hsd = txtHSD.getText().split("/");
+            int daysx = 0, monthsx = 0, yearsx = 0,
+                    dayhsd = 0, monthhsd = 0, yearhsd = 0;
+            try {
+                daysx = Integer.parseInt(nsx[0]);
+                monthsx = Integer.parseInt(nsx[1]);
+                yearsx = Integer.parseInt(nsx[2]);
+                SXKiemtra = LocalDate.of(yearsx, monthsx, daysx);
+
+                dayhsd = Integer.parseInt(hsd[0]);
+                monthhsd = Integer.parseInt(hsd[1]);
+                yearhsd = Integer.parseInt(hsd[2]);
+                SDKiemtra = LocalDate.of(yearhsd, monthhsd, dayhsd);
+            } catch (DateTimeException e) {
+                JOptionPane.showMessageDialog(rootPane, "Lỗi:" + e);
+                isOK = false;
+            } catch (NumberFormatException a) {
+                JOptionPane.showMessageDialog(rootPane, "Lỗi:" + a + " Xin nhập lại. VD:22/8/2001");
+                isOK = false;
+            }
+
+            if (isOK) {
+                String dateString = String.format("%d/%d/%d", daysx, monthsx, yearsx);
+                String dateStringSD = String.format("%d/%d/%d", dayhsd, monthhsd, yearhsd);
+
+                try {
+                    SX = sdf.parse(dateString);
+                    SD = sdf.parse(dateStringSD);
+                } catch (ParseException ex) {
+                    Logger.getLogger(SanPhamJDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            SanPham sp = new SanPham(maSP, tenSP, NhaSX, LoaiSP, soLuong, DonViTinh, giaNhap, giaBan, SX, SD);
+            // Lấy mã sản phẩm cần sửa từ table
+            String maSPCanSua = tblSanPham.getValueAt(selectIndex, 1).toString();
+            new SanPham_DAO().updateSanPham(sp, maSPCanSua);
+            ListSP.add(sp);
+            JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
         }
+        ListSP.clear();// xóa hết dữ liệu cũ đi
+        ListSP.addAll(new SanPham_DAO().getListSanPham());
+        showSanPham();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
-        int selectedRow = tblSanPham.getSelectedRow();
+        int dong = tblSanPham.getSelectedRow();
 
-        if (selectedRow >= 0) {
-            String msp = (String) modelSP.getValueAt(selectedRow, 0);
-            for (SanPham s : ListSP) {
-                if (msp.equalsIgnoreCase(s.getMaSP())) {
-                    txtMaSP.setText(s.getMaSP());
-                    txtTenSP.setText(s.getTenSP());
-                    txt_GiaBan.setText(String.valueOf(s.getGiaBan()));
-                    txt_GiaNhap.setText(String.valueOf(s.getGiaNhap()));
-                    txtNSX.setText(String.valueOf(s.getNgaySX()));
-                    txtHSD.setText(String.valueOf(s.getHSD()));
-                    txtSoLuong.setText(String.valueOf(s.getSl()));
-                    comboLoaiSP.setActionCommand(s.getLoaiSP());
-                    combo_DonViTinh.setActionCommand(s.getDonViTinh());
-                    combo_NhaSX.setActionCommand(s.getNhaSanXuat());
-                    break;
-                }
-            }
+        if (dong >= 0) {
+            // lấy dữ liệu từ tblSanPham getValueAt(dòng,cột) NOTE: cột từ 1-> n theo trong db
+            String msp = tblSanPham.getValueAt(dong, 1).toString();
+            txtMaSP.setText(msp);
+            txtTenSP.setText(tblSanPham.getValueAt(dong, 2).toString());
+            combo_NhaSX.setSelectedItem(tblSanPham.getValueAt(dong, 3));
+            comboLoaiSP.setSelectedItem(tblSanPham.getValueAt(dong, 4));
+            txtSoLuong.setText(tblSanPham.getValueAt(dong, 5).toString());
+            combo_DonViTinh.setSelectedItem(tblSanPham.getValueAt(dong, 6));
+            String[] s1 = tblSanPham.getValueAt(dong, 7).toString().split("\\s");
+            txt_GiaNhap.setText(s1[0]);
+            String[] s2 = tblSanPham.getValueAt(dong, 8).toString().split("\\s");
+            txt_GiaBan.setText(s2[0]);
+            txtNSX.setText(tblSanPham.getValueAt(dong, 9).toString());
+            txtHSD.setText(tblSanPham.getValueAt(dong, 10).toString());
         }
     }//GEN-LAST:event_tblSanPhamMouseClicked
+
+//    private String cutChar(String arry) {
+//        return arry.replaceAll("\\D+", "");
+//    }
+//
+//    private float convertedToNumbers(String s) {
+//        String number = "";
+//        String[] array = s.replace(",", " ").split("\\s");
+//        for (String i : array) {
+//            number = number.concat(i);
+//        }
+//        return Float.parseFloat(number);
+//    }
+//
+//    private void FormatMoney(JTextField money) {
+//        DecimalFormat formatter = new DecimalFormat("###,###,###");
+//
+//        money.setText(cutChar(money.getText()));
+//        if (money.getText().equals("")) {
+//            return;
+//        } else {
+//            money.setText(formatter.format(convertedToNumbers(money.getText())));
+//        }
+//    }
+//
+    private void txt_GiaNhapKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_GiaNhapKeyReleased
+//        FormatMoney(txt_GiaNhap);
+    }//GEN-LAST:event_txt_GiaNhapKeyReleased
+
+    private void txt_GiaBanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_GiaBanKeyReleased
+//        FormatMoney(txt_GiaBan);
+    }//GEN-LAST:event_txt_GiaBanKeyReleased
 
     /**
      * @param args the command line arguments
@@ -545,23 +721,6 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txt_GiaBan;
     private javax.swing.JTextField txt_GiaNhap;
     // End of variables declaration//GEN-END:variables
-        public void showData(List<SanPham> list, DefaultTableModel model) {
-        model.setRowCount(0);
-        int i = 1;
-        for (SanPham sp : list) {
-            String nsx = sdf.format(sp.getNgaySX()); // chuyển từ dạng yyyy-mm-dd sang dd/mm/yyyy
-            String hsd = sdf.format(sp.getHSD());
-            modelSP.addRow(new Object[]{
-                i++, sp.getMaSP(), sp.getTenSP(), sp.getNhaSanXuat(),
-                sp.getLoaiSP(), sp.getSl(), sp.getDonViTinh(), sp.getGiaNhap(),
-                sp.getGiaBan(), nsx, hsd
-            });
-//            modelSP.addRow(new Object[]{
-//                i++, sp.getMaSP(), sp.getTenSP(), sp.getNgaySX(), sp.getHSD(),
-//                sp.getType(), sp.getSl(), sp.getPrice()
-//            });
-        }
-    }
 
     private void showSanPham() {
         modelSP.setRowCount(0);
@@ -573,10 +732,6 @@ public class SanPhamJDialog extends javax.swing.JDialog {
                 i++, sp.getMaSP(), sp.getTenSP(), sp.getNhaSanXuat(),
                 sp.getLoaiSP(), sp.getSl(), sp.getDonViTinh(), sp.getGiaNhap(),
                 sp.getGiaBan(), nsx, hsd});
-//            modelSP.addRow(new Object[]{
-//                i++, sp.getMaSP(), sp.getTenSP(), sp.getNgaySX(), sp.getHSD(),
-//                sp.getType(), sp.getSl(), sp.getPrice()
-//            });
         }
     }
 }

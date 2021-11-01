@@ -15,22 +15,20 @@ public class KhachHang {
 
     private String maKH;
     private String hoTen;
-    private Date ngaySinh;
+    private String GT;
     private String diaChi;
     private String phoneNum;
-    private String email;
 
     public KhachHang() {
 
     }
 
-    public KhachHang(String maKH, String hoTen, Date ngaySinh, String diaChi, String phoneNum, String email) {
+    public KhachHang(String maKH, String hoTen, String GT, String diaChi, String phoneNum) {
         this.maKH = maKH;
         this.hoTen = hoTen;
-        this.ngaySinh = ngaySinh;
+        this.GT = GT;
         this.diaChi = diaChi;
         this.phoneNum = phoneNum;
-        this.email = email;
     }
 
     public String getMaKH() {
@@ -49,12 +47,12 @@ public class KhachHang {
         this.hoTen = hoTen;
     }
 
-    public Date getNgaySinh() {
-        return ngaySinh;
+    public String getGT() {
+        return GT;
     }
 
-    public void setNgaySinh(Date ngaySinh) {
-        this.ngaySinh = ngaySinh;
+    public void setGT(String GT) {
+        this.GT = GT;
     }
 
     public String getDiaChi() {
@@ -71,14 +69,6 @@ public class KhachHang {
 
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
 }

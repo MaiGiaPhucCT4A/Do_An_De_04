@@ -2,7 +2,7 @@
 use Do_An_De_04
 select * from SanPham
 delete SanPham
-sp_help tblSanPham
+sp_help SanPham
 
 
 --NHANVIEN(MaNV, Hoten, DiaChi, SDT, NgaySinh, GT, Luong) 
@@ -17,6 +17,7 @@ sp_help tblSanPham
 		Luong int not null
 	)
 --SANPHAM(MaSP, TenSP, NSX, HSD, LoaiSP, SoLuong, GiaBan) 
+
 	CREATE TABLE SanPham
 	(
 		MaSP varchar(10) primary key,
@@ -30,40 +31,33 @@ sp_help tblSanPham
 		NSX date not null,
 		HSD date not null,
 	)
-
+select * from SanPham
 alter table SanPham add constraint C_SP CHeck(nsx<hsd)
+alter table SanPham ALTER COLUMN GiaBan float
 DELETE from SanPham where MaSP = ''
 
---KHACHHANG(MaKH, TenKH, CMT, DiaChi, SoDienThoai, Email) 
-	create table KhachHang
-	(
-		MaKH varchar(10) primary key, 
-		TenKH nvarchar(50) not null, 
-		Ngaysinh date check (ngaysinh<getdate()) not null,
-		DiaChi nvarchar(50) not null, 
-		SoDienThoai varchar(12) unique, 
-		Email varchar(50) unique
-	)
-	go
---HOADONXUAT(MaHD, MaKH, NgayLapHD, MaNV, PhuongThucTT) 
-	create table HoaDonXuat
-	(
-		MaHD int identity primary key, 
-		MaKH varchar(10) foreign key references KhachHang, 
-		NgayLapHD date check (ngaylaphd>=getdate())not null, 
-		MaNV varchar(10) foreign key references nhanvien, 
-		PhuongThucTT nvarchar(50) not null
-	)
-	go
---CT_HOADON(MaHD, MaHang, SoLuongMua, DonGia)
-	create table CT_HOADON
-	(
-		MaHD int identity foreign key references hoadonxuat, 
-		MaSP varchar(10) foreign key references sanpham, 
-		SoLuongMua int not null, 
-		DonGia float not null
-	)
-
+--DONDATHANG
+create table DonDatHang
+(
+	MaHD int identity primary key,
+	NgayDat date not null,
+	MaSP varchar(10) foreign key references sanpham,
+	MaKH varchar(10) foreign key references khachhang,
+	TongTien float not null,
+)
+select * from DonDatHang
+delete from DonDatHang
+--KHACHHANG
+select * from KhachHang
+create table KhachHang
+(
+	MaKH varchar(10) primary key,
+	TenKH nvarchar(50) not null,
+	GioiTinh nvarchar(10) not null,
+	DiaChi nvarchar(50) not null,
+	SDT varchar(12) not null
+)
+select TenKH,SDT,DiaChi from KhachHang where MaKH = 'HN0'
 
 
 

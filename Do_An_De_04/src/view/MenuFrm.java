@@ -53,10 +53,20 @@ public class MenuFrm extends javax.swing.JFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\LaptopDT\\Downloads\\code tham khao\\huyphpk00628_asm\\HUYPHPK00628_asm\\src\\images\\hoadon.png")); // NOI18N
         jButton2.setText("Cập Nhật Đơn Hàng");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\LaptopDT\\Downloads\\code tham khao\\huyphpk00628_asm\\HUYPHPK00628_asm\\src\\images\\doanhthu.png")); // NOI18N
         jButton3.setText("Bán Hàng");
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\LaptopDT\\Downloads\\code tham khao\\huyphpk00628_asm\\HUYPHPK00628_asm\\src\\images\\thoat.png")); // NOI18N
         jButton4.setText("Thoát");
@@ -110,6 +120,14 @@ public class MenuFrm extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new SanPhamJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        new DonDatHangJDialog(this, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
