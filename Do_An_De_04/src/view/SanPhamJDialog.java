@@ -84,7 +84,6 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         comboLoaiSP = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         combo_NhaSX = new javax.swing.JComboBox<>();
@@ -163,8 +162,6 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setText("QUẢN LÝ SẢN PHẨM");
 
-        jButton1.setText("Cập nhật ");
-
         jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\LaptopDT\\Downloads\\code tham khao\\huyphpk00628_asm\\HUYPHPK00628_asm\\src\\images\\thoat.png")); // NOI18N
         jButton4.setText("Thoát");
 
@@ -212,12 +209,9 @@ public class SanPhamJDialog extends javax.swing.JDialog {
                                                 .addGap(97, 97, 97)
                                                 .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(60, 60, 60)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(77, 77, 77)
-                                                .addComponent(btnRefresh_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(77, 77, 77)
+                                        .addComponent(btnRefresh_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -316,10 +310,8 @@ public class SanPhamJDialog extends javax.swing.JDialog {
                             .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnRefresh_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))))
+                        .addGap(28, 28, 28)
+                        .addComponent(comboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -343,6 +335,19 @@ public class SanPhamJDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void CapNhapSoLuong(JTextField txt_NhapTenSP, JTextField txt_soluong) {
+        int slbanDau;
+        int sl = Integer.parseInt(txt_soluong.getText());
+        for (SanPham sp : ListSP) {
+            if (sp.getTenSP().equalsIgnoreCase(txt_NhapTenSP.getText())) {
+                slbanDau = sp.getSl();
+                slbanDau += sl;
+                new SanPham_DAO().Update_SoLuongSP(sp, txt_NhapTenSP.getText());
+                ListSP.clear();
+                ListSP.addAll(new SanPham_DAO().getListSanPham());
+            }
+        }
+    }
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
 
@@ -360,11 +365,18 @@ public class SanPhamJDialog extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Mã sản phẩm chưa hợp lệ, từ 3 đến 10 kí tự");
             return; // nếu sai thì thoát luôn khỏi hàm ko chạy tiếp nữa
         }
+        for (SanPham sp : ListSP) {
+            if (sp.getMaSP().equals(maSP)) {
+                JOptionPane.showMessageDialog(rootPane, "Mã sản phẩm bị trùng. Thêm không thành công");
+                return;
+            }
+        }
         tenSP = txtTenSP.getText();
         if (tenSP.length() == 0 || tenSP.length() > 50) {
             JOptionPane.showMessageDialog(rootPane, "Tên sản phẩm chưa hợp lệ, từ 3 đến 50 kí tự");
             return; // nếu sai thì thoát luôn khỏi hàm ko chạy tiếp nữa
         }
+
         NhaSX = combo_NhaSX.getSelectedItem().toString();
         if (NhaSX.equals("Chọn")) {
             JOptionPane.showMessageDialog(rootPane, "Hãy chọn nhà sản xuất");
@@ -429,6 +441,20 @@ public class SanPhamJDialog extends javax.swing.JDialog {
                 SD = sdf.parse(dateStringSD);
             } catch (ParseException ex) {
                 Logger.getLogger(SanPhamJDialog.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        for (SanPham sp : ListSP) {
+            if (sp.getTenSP().equalsIgnoreCase(tenSP)) {
+                int soluongBD = sp.getSl();
+                int soLuongThem = soLuong + soluongBD;
+                sp = new SanPham(soLuongThem);
+                new SanPham_DAO().Update_SoLuongSP(sp, tenSP);
+                ListSP.clear();
+                ListSP.addAll(new SanPham_DAO().getListSanPham());
+                JOptionPane.showMessageDialog(rootPane, "Vì sản phẩm đã tồn tại nên số lượng sản phẩm thêm thành công");
+                showSanPham();
+                return;
             }
         }
         SanPham sp = new SanPham(maSP, tenSP, NhaSX, LoaiSP, soLuong, DonViTinh, giaNhap, giaBan, SX, SD);
@@ -501,12 +527,6 @@ public class SanPhamJDialog extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, "Mã sản phẩm chưa hợp lệ, từ 3 đến 10 kí tự");
                 return; // nếu sai thì thoát luôn khỏi hàm ko chạy tiếp nữa
             }
-//            for (SanPham a : ListSP) {
-//                if (maSP.equals(a.getMaSP())) {
-//                    JOptionPane.showMessageDialog(rootPane, "Mã sản phẩm bị trùng");
-//                    return;
-//                }
-//            }
             tenSP = txtTenSP.getText();
             if (maSP.length() == 0 || maSP.length() > 50) {
                 JOptionPane.showMessageDialog(rootPane, "Tên sản phẩm chưa hợp lệ, từ 3 đến 50 kí tự");
@@ -697,7 +717,6 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> comboSort;
     private javax.swing.JComboBox<String> combo_DonViTinh;
     private javax.swing.JComboBox<String> combo_NhaSX;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

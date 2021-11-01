@@ -19,6 +19,7 @@ import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -118,17 +119,16 @@ public class ControllerImp {
 ////        }
 ////        return list;
 //    }
-
-    public <T> List<T> sortByName(List<T> list) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void sortByName(List<SanPham> listSP) {
+        listSP.sort(new Comparator<SanPham>() {
+            @Override
+            public int compare(SanPham o1, SanPham o2) {
+                return o1.getMaSP().compareTo(o2.getMaSP());
+            }
+        });
     }
-
-    public <T> List<T> sortByQuantity(List<T> list) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public void sortByquantity_ASC(){
+        
     }
-
-    public <T> List<T> searchByName(List<T> list, String key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

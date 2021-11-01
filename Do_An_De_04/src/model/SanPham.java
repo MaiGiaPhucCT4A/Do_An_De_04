@@ -40,6 +40,11 @@ public class SanPham {
         this.HSD = HSD;
     }
 
+    public SanPham(int sl) {
+        this.sl = sl;
+    }
+    
+
     public String getMaSP() {
         return maSP;
     }

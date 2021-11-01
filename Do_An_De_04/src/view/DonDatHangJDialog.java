@@ -709,6 +709,16 @@ public class DonDatHangJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_combo_TENSPPopupMenuWillBecomeInvisible
 
     public void refresh() {
+        int tongSL, slNhap, slConLai;
+        slNhap = Integer.parseInt(txt_slNhap.getText());
+        tongSL = Integer.parseInt(txt_TONGSOLUONG.getText());
+        slConLai = tongSL - slNhap;
+        SanPham sp = new SanPham(slConLai);
+        String tensp = combo_TENSP.getSelectedItem().toString();
+        new SanPham_DAO().Update_SoLuongSP(sp, tensp);
+        listSP.clear();
+        listSP.addAll(new SanPham_DAO().getListSanPham());
+
         txtKH.setText("");
         txtSDT.setText("");
         txtAddress.setText("");
@@ -721,6 +731,7 @@ public class DonDatHangJDialog extends javax.swing.JDialog {
         txt_TONGTIEN.setText("");
         txt_slNhap.setText("");
         txt_TONGSOLUONG.setText("");
+
     }
     private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
 
@@ -908,12 +919,12 @@ public class DonDatHangJDialog extends javax.swing.JDialog {
     }
 
     private void showHoaDon() {
-        modelHD.setRowCount(0);
-        String masp = null, tensp = null;
         if (listHD.size() > 0) {
             int maHD = listHD.get(listHD.size() - 1).getMaHD();
             HoaDon.setsId(maHD + 1);
         }
+        modelHD.setRowCount(0);
+        String masp = null, tensp = null;
         for (HoaDon hd : listHD) {
             for (SanPham s : listSP) {
                 if (hd.getMaSP().equals(s.getMaSP())) {

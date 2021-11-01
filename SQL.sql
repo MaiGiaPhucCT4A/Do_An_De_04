@@ -32,8 +32,9 @@ sp_help SanPham
 		HSD date not null,
 	)
 select * from SanPham
+
 alter table SanPham add constraint C_SP CHeck(nsx<hsd)
-alter table SanPham ALTER COLUMN GiaBan float
+alter table SanPham ALTER COLUMN GiaNhap int
 DELETE from SanPham where MaSP = ''
 
 --DONDATHANG
@@ -47,6 +48,8 @@ create table DonDatHang
 )
 select * from DonDatHang
 delete from DonDatHang
+alter table DonDatHang ALTER COLUMN TongTien int
+sp_help dondathang
 --KHACHHANG
 select * from KhachHang
 create table KhachHang

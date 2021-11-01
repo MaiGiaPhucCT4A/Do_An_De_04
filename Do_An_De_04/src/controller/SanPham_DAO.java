@@ -108,6 +108,18 @@ public class SanPham_DAO {
         }
     }
 
+    public void Update_SoLuongSP(SanPham sp, String tensp) {
+        String sql = "update SanPham set SoLuong = ? where TenSP = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, sp.getSl());
+            ps.setString(2, tensp);
+            int n = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(HoaDon_DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public List<SanPham> getListSanPham() { // đọc ở bảng
         List<SanPham> listSP = new ArrayList<>();
         String sql = "select * from SanPham";
