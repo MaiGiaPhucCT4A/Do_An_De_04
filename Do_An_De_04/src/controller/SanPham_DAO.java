@@ -120,6 +120,111 @@ public class SanPham_DAO {
         }
     }
 
+    public List<SanPham> LocSP_NhaSX(String nhaSX, List<SanPham> listSP) {
+
+        String sql = "select * from SanPham where NhaSX = N'" + nhaSX + "'";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) { // bộ dữ liệu( dòng tiếp theo)
+                SanPham s = new SanPham();
+                s.setMaSP(rs.getString("MaSP"));// lấy giá trị từ db
+                s.setTenSP(rs.getString("TenSP"));
+                s.setNhaSanXuat(rs.getString("NhaSX"));
+                s.setLoaiSP(rs.getString("LoaiSP"));
+                s.setSl(rs.getInt("SoLuong"));
+                s.setDonViTinh(rs.getString("DonViTinh"));
+                s.setGiaNhap(rs.getInt("GiaNhap"));
+                s.setGiaBan(rs.getInt("GiaBan"));
+                s.setNgaySX(rs.getDate("NSX"));
+                s.setHSD(rs.getDate("HSD"));
+
+                listSP.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listSP;
+    }
+
+    public List<SanPham> LocTop10SP(int top, String sx, List<SanPham> listSP) {
+        String sql = "select top " + top + " * from SanPham order by SoLuong " + sx;
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SanPham s = new SanPham();
+                s.setMaSP(rs.getString("MaSP"));
+                s.setTenSP(rs.getString("TenSP"));
+                s.setNhaSanXuat(rs.getString("NhaSX"));
+                s.setLoaiSP(rs.getString("LoaiSP"));
+                s.setSl(rs.getInt("SoLuong"));
+                s.setDonViTinh(rs.getString("DonViTinh"));
+                s.setGiaNhap(rs.getInt("GiaNhap"));
+                s.setGiaBan(rs.getInt("GiaBan"));
+                s.setNgaySX(rs.getDate("NSX"));
+                s.setHSD(rs.getDate("HSD"));
+
+                listSP.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listSP;
+    }
+
+    public List<SanPham> LocTopSP_QuaHSD(List<SanPham> listSP) {
+        String sql = "select * from SanPham where HSD < GETDATE()";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SanPham s = new SanPham();
+                s.setMaSP(rs.getString("MaSP"));
+                s.setTenSP(rs.getString("TenSP"));
+                s.setNhaSanXuat(rs.getString("NhaSX"));
+                s.setLoaiSP(rs.getString("LoaiSP"));
+                s.setSl(rs.getInt("SoLuong"));
+                s.setDonViTinh(rs.getString("DonViTinh"));
+                s.setGiaNhap(rs.getInt("GiaNhap"));
+                s.setGiaBan(rs.getInt("GiaBan"));
+                s.setNgaySX(rs.getDate("NSX"));
+                s.setHSD(rs.getDate("HSD"));
+
+                listSP.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listSP;
+    }
+
+    public List<SanPham> LocTopSP_NSXganNhat(List<SanPham> listSP) {
+        String sql = "select TOP 5 * from SanPham order by ABS(DATEDIFF(mm,NSX,GETDATE()))";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SanPham s = new SanPham();
+                s.setMaSP(rs.getString("MaSP"));
+                s.setTenSP(rs.getString("TenSP"));
+                s.setNhaSanXuat(rs.getString("NhaSX"));
+                s.setLoaiSP(rs.getString("LoaiSP"));
+                s.setSl(rs.getInt("SoLuong"));
+                s.setDonViTinh(rs.getString("DonViTinh"));
+                s.setGiaNhap(rs.getInt("GiaNhap"));
+                s.setGiaBan(rs.getInt("GiaBan"));
+                s.setNgaySX(rs.getDate("NSX"));
+                s.setHSD(rs.getDate("HSD"));
+
+                listSP.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listSP;
+    }
+
     public List<SanPham> getListSanPham() { // đọc ở bảng
         List<SanPham> listSP = new ArrayList<>();
         String sql = "select * from SanPham";
@@ -165,7 +270,7 @@ public class SanPham_DAO {
     }
 
     public void loadData_SanPham(JComboBox<String> ten_maSP, JComboBox<String> combo_maSP, JComboBox<String> combo_loaiSP,
-            JTextField txtNSX, JTextField txtHSD, JTextField txtSL, JTextField txtGiaBan) {
+            JTextField txtNSX, JTextField txtHSD, JTextField txtSL, JTextField txtGiaBan, JComboBox<String> combo_dv) {
         String sql = "select * from SanPham where TenSP = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -173,6 +278,7 @@ public class SanPham_DAO {
             rs = ps.executeQuery();
             combo_maSP.removeAllItems();
             combo_loaiSP.removeAllItems();
+            combo_dv.removeAllItems();
             while (rs.next()) {
                 combo_maSP.addItem(rs.getString("MaSP").trim());
                 combo_loaiSP.addItem(rs.getString("LoaiSP").trim());
@@ -180,6 +286,7 @@ public class SanPham_DAO {
                 txtHSD.setText(rs.getString("HSD").trim());
                 txtSL.setText(rs.getString("SoLuong").trim());
                 txtGiaBan.setText(rs.getString("GiaBan").trim());
+                combo_dv.addItem(rs.getString("DonViTinh").trim());
             }
         } catch (SQLException ex) {
             Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);

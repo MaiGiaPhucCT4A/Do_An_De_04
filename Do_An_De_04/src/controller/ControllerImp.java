@@ -122,13 +122,75 @@ public class ControllerImp {
     public void sortByName(List<SanPham> listSP) {
         listSP.sort(new Comparator<SanPham>() {
             @Override
-            public int compare(SanPham o1, SanPham o2) {
+            public int compare(SanPham o1, SanPham o2) { //o1>o2 xếp theo A-Z, 1-10
+                return o1.getTenSP().compareTo(o2.getTenSP());
+            }
+        });
+    }
+
+    public void sortByMaSP(List<SanPham> listSP) {
+        listSP.sort(new Comparator<SanPham>() {
+            @Override
+            public int compare(SanPham o1, SanPham o2) { //o1>o2 xếp theo A-Z, 1-10
                 return o1.getMaSP().compareTo(o2.getMaSP());
             }
         });
     }
-    
-    public void sortByquantity_ASC(){
-        
+
+    public void sortByquantity_ASC(List<SanPham> listSP) {
+        listSP.sort(new Comparator<SanPham>() {
+            @Override
+            public int compare(SanPham o1, SanPham o2) {
+                if (o1.getSl() > o2.getSl()) {
+                    return 1;
+                } else if (o1.getSl() < o2.getSl()) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
     }
+
+    public void sortByquantity_DEC(List<SanPham> listSP) {
+        listSP.sort(new Comparator<SanPham>() {
+            @Override
+            public int compare(SanPham o1, SanPham o2) {
+                if (o1.getSl() > o2.getSl()) {
+                    return -1;
+                } else if (o1.getSl() < o2.getSl()) {
+                    return 1;
+                }
+                return 0;
+            }
+        });
+    }
+
+    public void sortByMoney_ASC(List<SanPham> listSP) {
+        listSP.sort(new Comparator<SanPham>() {
+            @Override
+            public int compare(SanPham o1, SanPham o2) {
+                if (o1.getGiaBan() > o2.getGiaBan()) {
+                    return 1;
+                } else if (o1.getGiaBan() < o2.getGiaBan()) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
+    }
+
+    public void sortByMoney_DEC(List<SanPham> listSP) {
+        listSP.sort(new Comparator<SanPham>() {
+            @Override
+            public int compare(SanPham o1, SanPham o2) {
+                if (o1.getGiaBan() < o2.getGiaBan()) {
+                    return 1;
+                } else if (o1.getGiaBan() > o2.getGiaBan()) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
+    }
+
 }

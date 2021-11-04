@@ -31,12 +31,30 @@ sp_help SanPham
 		NSX date not null,
 		HSD date not null,
 	)
-select * from SanPham
+select top 5 * from SanPham order by SoLuong desc
+select * from SanPham where NhaSX = N'coCA'
 
+select * from SanPham order by ABS(DATEDIFF(mm,NSX,GETDATE())) -- (NGÀY HIỆN TẠI - NGÀY SX)
+select top 5 * from SanPham order by NSX desc
+--select * from SanPham where NSX <= GETDATE()
+select * from SanPham
 alter table SanPham add constraint C_SP CHeck(nsx<hsd)
 alter table SanPham ALTER COLUMN GiaNhap int
 DELETE from SanPham where MaSP = ''
+--BANHANG
+drop table banhang
+create table BanHang
+(
+	MaHD varchar(10),
+	NgayDat date not null,
+	MaSP varchar(10) foreign key references sanpham,
+	SoLuongMua int not null,
+	TongTien float not null,
+	constraint PK_BH primary key(mahd,masp)
+)
 
+select * from BanHang a,SanPham b where a.MaSP=b.MaSP
+select * from BanHang
 --DONDATHANG
 create table DonDatHang
 (
@@ -47,6 +65,8 @@ create table DonDatHang
 	TongTien float not null,
 )
 select * from DonDatHang
+select sum(Tongtien) as Tong from DonDatHang
+insert into DonDatHang(MaHD) 
 delete from DonDatHang
 alter table DonDatHang ALTER COLUMN TongTien int
 sp_help dondathang

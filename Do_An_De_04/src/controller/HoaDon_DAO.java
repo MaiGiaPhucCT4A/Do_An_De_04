@@ -60,18 +60,6 @@ public class HoaDon_DAO {
         return false;
     }
 
-//    public void Update_SoLuongSP(SanPham sp, String tensp) {
-//        String sql = "update SanPham set SoLuong = ? where TenSP = ?";
-//        try {
-//            PreparedStatement ps = conn.prepareStatement(sql);
-//            ps.setInt(1, sp.getSl());
-//            ps.setString(2, tensp);
-//            int n = ps.executeUpdate();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(HoaDon_DAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-
     public List<HoaDon> getListHoaDon() { // đọc ở bảng
         List<HoaDon> listHD = new ArrayList<>();
         String sql = "select * from DonDatHang";

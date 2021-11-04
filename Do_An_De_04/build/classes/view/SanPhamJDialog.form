@@ -56,39 +56,15 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                              <Component id="comboSort" alignment="1" min="-2" pref="114" max="-2" attributes="0"/>
-                                              <Component id="btnThem" alignment="1" min="-2" pref="114" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="comboFilter" alignment="0" min="-2" pref="252" max="-2" attributes="0"/>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="btnSua" min="-2" pref="114" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
-                                                      <Component id="btnXoa" min="-2" pref="114" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                              <Component id="btnExport" min="-2" pref="114" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                                              <Component id="btnRefresh_Update" min="-2" pref="114" max="-2" attributes="0"/>
-                                          </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="txtMaSP" max="32767" attributes="0"/>
                                           <Component id="combo_DonViTinh" max="32767" attributes="0"/>
@@ -120,6 +96,21 @@
                                           </Group>
                                       </Group>
                                   </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="btnThem" min="-2" pref="157" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="btnSua" min="-2" pref="114" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+                                              <Component id="btnXoa" min="-2" pref="114" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="comboSort" min="-2" pref="242" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="393" max="-2" attributes="0"/>
+                                      <Component id="btnRefresh_Update" min="-2" pref="148" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -133,22 +124,36 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="434" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                              <Component id="txtGiaBan" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txt_GiaBan" min="-2" pref="84" max="-2" attributes="0"/>
-                              <EmptySpace pref="26" max="32767" attributes="0"/>
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="txtNSX" min="-2" pref="106" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtHSD" min="-2" pref="106" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" pref="252" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                                      <Component id="txtGiaBan" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="txt_GiaBan" min="-2" pref="84" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="txtNSX" min="-2" pref="106" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="txtHSD" min="-2" pref="106" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="btnExport" min="-2" pref="170" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="comboFilter" min="-2" pref="252" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="235" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel1" min="-2" pref="252" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -197,20 +202,18 @@
                       <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                              <Component id="btnThem" min="-2" pref="49" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="comboSort" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="btnSua" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
-                                  <Component id="btnXoa" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
-                                  <Component id="btnExport" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
-                                  <Component id="btnRefresh_Update" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                                  <Component id="comboSort" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="comboFilter" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="comboFilter" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="btnSua" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="btnXoa" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="btnExport" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="btnRefresh_Update" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="btnThem" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -316,6 +319,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnThem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="E:\QUAN_LY_LINH_KIEN\Quan_Ly_LinhKien\src\Image\Add.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="TH&#xca;M SP M&#x1eda;I"/>
               </Properties>
               <Events>
@@ -324,6 +330,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnSua">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="E:\QUAN_LY_LINH_KIEN\Quan_Ly_LinhKien\src\Image\Change.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="S&#x1eec;A"/>
               </Properties>
               <Events>
@@ -332,6 +341,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnXoa">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="E:\QUAN_LY_LINH_KIEN\Quan_Ly_LinhKien\src\Image\Delete.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="X&#xd3;A"/>
               </Properties>
               <Events>
@@ -340,27 +352,41 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnExport">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="E:\QUAN_LY_LINH_KIEN\Quan_Ly_LinhKien\src\Image\Print Sale.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="IN DANH S&#xc1;CH"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnRefresh_Update">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="E:\QUAN_LY_LINH_KIEN\Quan_Ly_LinhKien\src\Image\Refresh-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="REFRESH"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefresh_UpdateActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="comboSort">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="6">
+                  <StringArray count="8">
                     <StringItem index="0" value="S&#x1eaf;p x&#x1ebf;p"/>
-                    <StringItem index="1" value="S&#x1eaf;p x&#x1ebf;p theo Alphabet"/>
-                    <StringItem index="2" value="S&#x1eaf;p x&#x1ebf;p theo s&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
-                    <StringItem index="3" value="S&#x1eaf;p x&#x1ebf;p theo gi&#xe1; ti&#x1ec1;n"/>
-                    <StringItem index="4" value="S&#x1eaf;p x&#x1ebf;p theo m&#xe3; SP"/>
-                    <StringItem index="5" value=" "/>
+                    <StringItem index="1" value="S&#x1eaf;p x&#x1ebf;p theo t&#xea;n SP (A-Z)"/>
+                    <StringItem index="2" value="S&#x1eaf;p x&#x1ebf;p theo s&#x1ed1; l&#x1b0;&#x1ee3;ng t&#x103;ng d&#x1ea7;n"/>
+                    <StringItem index="3" value="S&#x1eaf;p x&#x1ebf;p theo s&#x1ed1; l&#x1b0;&#x1ee3;ng gi&#x1ea3;m d&#x1ea7;n"/>
+                    <StringItem index="4" value="S&#x1eaf;p x&#x1ebf;p theo gi&#xe1; ti&#x1ec1;n t&#x103;ng d&#x1ea7;n"/>
+                    <StringItem index="5" value="S&#x1eaf;p x&#x1ebf;p theo gi&#xe1; ti&#x1ec1;n gi&#x1ea3;m d&#x1ea7;n"/>
+                    <StringItem index="6" value="S&#x1eaf;p x&#x1ebf;p theo m&#xe3; SP (A-Z)"/>
+                    <StringItem index="7" value=" "/>
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboSortActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -368,15 +394,19 @@
             <Component class="javax.swing.JComboBox" name="comboFilter">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="5">
+                  <StringArray count="6">
                     <StringItem index="0" value="L&#x1ecd;c SP"/>
-                    <StringItem index="1" value="L&#x1ecd;c top SP c&#xf3; s&#x1ed1; l&#x1b0;&#x1ee3;ng l&#x1edb;n nh&#x1ea5;t"/>
-                    <StringItem index="2" value="L&#x1ecd;c top SP c&#xf3; s&#x1ed1; l&#x1b0;&#x1ee3;ng nh&#x1ecf; nh&#x1ea5;t"/>
-                    <StringItem index="3" value="L&#x1ecd;c top 10 SP c&#xf3; NSX g&#x1ea7;n v&#x1edb;i ng&#xe0;y hi&#x1ec7;n t&#x1ea1;i nh&#x1ea5;t"/>
-                    <StringItem index="4" value="L&#x1ecd;c danh s&#xe1;ch SP &#x111;&#xe3; qu&#xe1; h&#x1ea1;n s&#x1eed; d&#x1ee5;ng"/>
+                    <StringItem index="1" value="L&#x1ecd;c SP c&#xf9;ng nh&#xe0; s&#x1ea3;n xu&#x1ea5;t"/>
+                    <StringItem index="2" value="L&#x1ecd;c top 10 SP c&#xf3; s&#x1ed1; l&#x1b0;&#x1ee3;ng l&#x1edb;n nh&#x1ea5;t"/>
+                    <StringItem index="3" value="L&#x1ecd;c top 10 SP c&#xf3; s&#x1ed1; l&#x1b0;&#x1ee3;ng nh&#x1ecf; nh&#x1ea5;t"/>
+                    <StringItem index="4" value="L&#x1ecd;c top 10 SP c&#xf3; NSX g&#x1ea7;n v&#x1edb;i ng&#xe0;y hi&#x1ec7;n t&#x1ea1;i nh&#x1ea5;t"/>
+                    <StringItem index="5" value="L&#x1ecd;c danh s&#xe1;ch SP &#x111;&#xe3; qu&#xe1; h&#x1ea1;n s&#x1eed; d&#x1ee5;ng"/>
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboFilterActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -498,15 +528,17 @@
             <Component class="javax.swing.JComboBox" name="combo_DonViTinh">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="8">
+                  <StringArray count="10">
                     <StringItem index="0" value="1 chi&#x1ebf;c"/>
                     <StringItem index="1" value="1 g&#xf3;i"/>
                     <StringItem index="2" value="1 h&#x1ed9;p"/>
                     <StringItem index="3" value="1 chai"/>
                     <StringItem index="4" value="1 lon"/>
-                    <StringItem index="5" value="1 k&#xe9;t"/>
-                    <StringItem index="6" value="1 th&#xf9;ng"/>
-                    <StringItem index="7" value=" "/>
+                    <StringItem index="5" value="1 l&#x1ecd;"/>
+                    <StringItem index="6" value="1 b&#x1ecb;ch"/>
+                    <StringItem index="7" value="1 k&#xe9;t"/>
+                    <StringItem index="8" value="1 th&#xf9;ng"/>
+                    <StringItem index="9" value=" "/>
                   </StringArray>
                 </Property>
               </Properties>

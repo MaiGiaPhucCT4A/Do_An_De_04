@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.ControllerImp;
 import controller.SanPham_DAO;
 import java.io.File;
 import java.text.DecimalFormat;
@@ -109,6 +110,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tblSanPham);
 
+        btnThem.setIcon(new javax.swing.ImageIcon("E:\\QUAN_LY_LINH_KIEN\\Quan_Ly_LinhKien\\src\\Image\\Add.png")); // NOI18N
         btnThem.setText("THÊM SP MỚI");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,6 +118,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
             }
         });
 
+        btnSua.setIcon(new javax.swing.ImageIcon("E:\\QUAN_LY_LINH_KIEN\\Quan_Ly_LinhKien\\src\\Image\\Change.png")); // NOI18N
         btnSua.setText("SỬA");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,6 +126,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
             }
         });
 
+        btnXoa.setIcon(new javax.swing.ImageIcon("E:\\QUAN_LY_LINH_KIEN\\Quan_Ly_LinhKien\\src\\Image\\Delete.png")); // NOI18N
         btnXoa.setText("XÓA");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,13 +134,30 @@ public class SanPhamJDialog extends javax.swing.JDialog {
             }
         });
 
+        btnExport.setIcon(new javax.swing.ImageIcon("E:\\QUAN_LY_LINH_KIEN\\Quan_Ly_LinhKien\\src\\Image\\Print Sale.png")); // NOI18N
         btnExport.setText("IN DANH SÁCH");
 
+        btnRefresh_Update.setIcon(new javax.swing.ImageIcon("E:\\QUAN_LY_LINH_KIEN\\Quan_Ly_LinhKien\\src\\Image\\Refresh-icon.png")); // NOI18N
         btnRefresh_Update.setText("REFRESH");
+        btnRefresh_Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefresh_UpdateActionPerformed(evt);
+            }
+        });
 
-        comboSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp", "Sắp xếp theo Alphabet", "Sắp xếp theo số lượng", "Sắp xếp theo giá tiền", "Sắp xếp theo mã SP", " " }));
+        comboSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp", "Sắp xếp theo tên SP (A-Z)", "Sắp xếp theo số lượng tăng dần", "Sắp xếp theo số lượng giảm dần", "Sắp xếp theo giá tiền tăng dần", "Sắp xếp theo giá tiền giảm dần", "Sắp xếp theo mã SP (A-Z)", " " }));
+        comboSort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboSortActionPerformed(evt);
+            }
+        });
 
-        comboFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lọc SP", "Lọc top SP có số lượng lớn nhất", "Lọc top SP có số lượng nhỏ nhất", "Lọc top 10 SP có NSX gần với ngày hiện tại nhất", "Lọc danh sách SP đã quá hạn sử dụng" }));
+        comboFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lọc SP", "Lọc SP cùng nhà sản xuất", "Lọc top 10 SP có số lượng lớn nhất", "Lọc top 10 SP có số lượng nhỏ nhất", "Lọc top 10 SP có NSX gần với ngày hiện tại nhất", "Lọc danh sách SP đã quá hạn sử dụng" }));
+        comboFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboFilterActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("MÃ SẢN PHẨM");
 
@@ -171,7 +192,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
 
         jLabel8.setText("ĐƠN VỊ TÍNH");
 
-        combo_DonViTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 chiếc", "1 gói", "1 hộp", "1 chai", "1 lon", "1 két", "1 thùng", " " }));
+        combo_DonViTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 chiếc", "1 gói", "1 hộp", "1 chai", "1 lon", "1 lọ", "1 bịch", "1 két", "1 thùng", " " }));
 
         jLabel9.setText("GÍA NHẬP");
 
@@ -190,30 +211,12 @@ public class SanPhamJDialog extends javax.swing.JDialog {
                     .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(comboSort, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(206, 206, 206)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(comboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(97, 97, 97)
-                                                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(60, 60, 60)
-                                        .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(77, 77, 77)
-                                        .addComponent(btnRefresh_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtMaSP)
                                     .addComponent(combo_DonViTinh, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -238,7 +241,19 @@ public class SanPhamJDialog extends javax.swing.JDialog {
                                         .addGap(53, 53, 53))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(txt_GiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(89, 89, 89)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(105, 105, 105)
+                                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(comboSort, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(393, 393, 393)
+                                .addComponent(btnRefresh_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
@@ -247,21 +262,30 @@ public class SanPhamJDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(434, 434, 434)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(txtGiaBan)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt_GiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNSX, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtHSD, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addComponent(txtGiaBan)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_GiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtNSX, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(jLabel5)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtHSD, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(comboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(235, 235, 235)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,18 +324,16 @@ public class SanPhamJDialog extends javax.swing.JDialog {
                 .addGap(57, 57, 57)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(comboSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRefresh_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addComponent(comboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(comboSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRefresh_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -662,6 +684,65 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     private void txt_GiaBanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_GiaBanKeyReleased
 //        FormatMoney(txt_GiaBan);
     }//GEN-LAST:event_txt_GiaBanKeyReleased
+
+    private void comboSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSortActionPerformed
+        int index = comboSort.getSelectedIndex();
+        if (index == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Xin lựa chọn các mục sắp xếp");
+            return;
+        } else if (index == 1) {
+            new ControllerImp().sortByName(ListSP);
+        } else if (index == 2) {
+            new ControllerImp().sortByquantity_ASC(ListSP);;
+        } else if (index == 3) {
+            new ControllerImp().sortByquantity_DEC(ListSP);
+        } else if (index == 4) {
+            new ControllerImp().sortByMoney_ASC(ListSP);
+        } else if (index == 5) {
+            new ControllerImp().sortByMoney_DEC(ListSP);
+        } else if (index == 6) {
+            new ControllerImp().sortByMaSP(ListSP);
+        }
+        showSanPham();
+    }//GEN-LAST:event_comboSortActionPerformed
+
+    private void btnRefresh_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefresh_UpdateActionPerformed
+        ListSP.clear();
+        ListSP.addAll(new SanPham_DAO().getListSanPham());
+        showSanPham();
+    }//GEN-LAST:event_btnRefresh_UpdateActionPerformed
+
+    private void comboFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFilterActionPerformed
+        List<SanPham> list = new ArrayList<>();
+        int i = comboFilter.getSelectedIndex();
+        if (i == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Xin lựa chọn các mục lọc");
+            return;
+        } else if (i == 1) {
+            String nhaSX = combo_NhaSX.getSelectedItem().toString();
+            if (nhaSX.equals("Chọn")) {
+                JOptionPane.showMessageDialog(rootPane, "Hãy chọn nhà sản xuất");
+                return; // nếu sai thì thoát luôn khỏi hàm ko chạy tiếp nữa
+            } else if (nhaSX.length() > 0) {
+                new SanPham_DAO().LocSP_NhaSX(nhaSX, list);
+            }
+        } else if (i == 2) {
+            new SanPham_DAO().LocTop10SP(5, "desc", list);
+        } else if (i == 3) {
+            new SanPham_DAO().LocTop10SP(5, "", list);
+        } else if (i == 4) {
+            new SanPham_DAO().LocTopSP_NSXganNhat(list);
+        } else if (i == 5) {
+            new SanPham_DAO().LocTopSP_QuaHSD(list);
+            if (list.size() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "Không có sản phẩm nào quá hạn sử dụng");
+                return;
+            }
+        }
+        ListSP.clear();// XÓA hết nội dung đi
+        ListSP.addAll(list);// sau đó cập nhật lại
+        showSanPham();
+    }//GEN-LAST:event_comboFilterActionPerformed
 
     /**
      * @param args the command line arguments
