@@ -1,9 +1,44 @@
 ﻿create database Do_An_De_04
 use Do_An_De_04
+
 select * from SanPham
+
+create table LoaiSanPham
+(
+	LoaiSP nvarchar(50)
+)s
+
+select distinct LoaiSP from SanPham
+
+select * from DonDatHang order by MaHD desc
+--select * from BanHang
+--select * from KhachHang
+select * from DoanhThu order by MaHD
+select distinct maHD from MaDonHang
+select distinct maHD from MaBanHang
+delete from mabanhang where mahd = 'HD3'
+delete from DonDatHang where MaHD = 'DH10'
+select distinct maHD from DonDatHang order by MaHD
+
 delete SanPham
 sp_help SanPham
 
+select MaHD,NgayDat,a.MaSP,a.MaKH,SoLuongMua,TongTien,TenSP,TenKH 
+from DonDatHang a,KhachHang b,SanPham c 
+where a.MaKH=b.MaKH and a.MaSP=c.MaSP and maHD = 'DH1' order by MaHD
+
+create table MaDonHang
+(
+	MaHD varchar(10)
+)
+
+create table MaBanHang
+(
+	MaHD varchar(10)
+)
+
+
+create table 
 
 --NHANVIEN(MaNV, Hoten, DiaChi, SDT, NgaySinh, GT, Luong) 
 	create table NhanVien
@@ -43,33 +78,54 @@ alter table SanPham ALTER COLUMN GiaNhap int
 DELETE from SanPham where MaSP = ''
 --BANHANG
 drop table banhang
+--create table BanHang
+--(
+--	MaHD varchar(10),
+--	NgayDat datetime not null,
+--	MaSP varchar(10) foreign key references sanpham,
+--	SoLuongMua int not null,
+--	TongTien int not null,
+--	constraint PK_BH primary key(mahd,NgayDat)
+--)
+
 create table BanHang
 (
 	MaHD varchar(10),
-	NgayDat date not null,
 	MaSP varchar(10) foreign key references sanpham,
 	SoLuongMua int not null,
-	TongTien float not null,
-	constraint PK_BH primary key(mahd,masp)
+	TongTien int not null
 )
 
-select * from BanHang a,SanPham b where a.MaSP=b.MaSP
+insert into BanHang values ('HD3',GETDATE(),'DU2',12,20000000)
+
 select * from BanHang
+delete from BanHang
+-- DOANH THU
+drop table DoanhThu
+create table DoanhThu
+(
+	MaHD varchar(10) primary key,
+	NgayBan datetime not null,
+	TongTienThu int,
+	TienNhan int,
+	TienDu int
+)
+insert into DoanhThu(MaHD,NgayDat,MaSP,TenSP,SoLuongMua) values ()
+select * from DoanhThu
+delete from DoanhThu
 --DONDATHANG
 create table DonDatHang
 (
-	MaHD int identity primary key,
-	NgayDat date not null,
+	MaHD varchar(10) not null,
+	NgayDat date check (ngaydat >= getdate()) not null,
 	MaSP varchar(10) foreign key references sanpham,
 	MaKH varchar(10) foreign key references khachhang,
-	TongTien float not null,
+	SoLuongMua int not null,
+	TongTien int not null
 )
+drop table DonDatHang
 select * from DonDatHang
-select sum(Tongtien) as Tong from DonDatHang
-insert into DonDatHang(MaHD) 
-delete from DonDatHang
-alter table DonDatHang ALTER COLUMN TongTien int
-sp_help dondathang
+delete from dondathang
 --KHACHHANG
 select * from KhachHang
 create table KhachHang

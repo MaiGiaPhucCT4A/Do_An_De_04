@@ -72,7 +72,7 @@ public class SanPham_DAO {
     }
 
     public void delectSanPham(String masp) {
-        String sql = "delete from SanPham where MaSP = ?";
+        String sql = "delete from BanHang where MaSP = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, masp);
@@ -293,7 +293,34 @@ public class SanPham_DAO {
         }
     }
 
-    public static void main(String[] args) {
-        new SanPham_DAO();
+    public void Update_LoaiSP(SanPham sp) {
+        String sql = "insert into LoaiSanPham values (?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, sp.getLoaiSP());
+
+            int n = ps.executeUpdate();// update data
+        } catch (SQLException ex) {
+            System.out.println("Lỗi: " + ex);
+            Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException n) {
+            System.out.println("Lỗi: " + n);
+        }
+    }
+
+    public void initComboBox_LoaiSanPham(JComboBox<String> combo_LoaiSP) {
+        String sql = "select distinct LoaiSP from LoaiSanPham";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            combo_LoaiSP.removeAllItems();
+            while (rs.next()) {
+                combo_LoaiSP.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(combo_LoaiSP, ex.getMessage());
+            ex.printStackTrace();
+        }
     }
 }

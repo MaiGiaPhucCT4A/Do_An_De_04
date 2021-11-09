@@ -12,41 +12,52 @@ import java.util.List;
  *
  * @author LaptopDT
  */
-public class HoaDon {
+public class DatHang {
 
-    private int maHD;
-    private static int sId = 1;
+    private String maHD;
     private String maKH;
+    private String tenKH;
     private Date ngayLapHoaDon;
     private String maSP;
+    private String tenSP;
+    private int soLuongMua;
     private int TongTien;
 
-    public HoaDon() {
-        this.maHD = sId++;
+    public DatHang() {
+
     }
 
-    public HoaDon(String maKH, Date ngayLapHoaDon, String maSP, int TongTien) {
-        this.maHD = sId++;
+    public DatHang(String maHD, String maKH, Date ngayLapHoaDon, String maSP, int soLuongMua, int TongTien) {
+        this.maHD = maHD;
         this.maKH = maKH;
         this.ngayLapHoaDon = ngayLapHoaDon;
         this.maSP = maSP;
+        this.soLuongMua = soLuongMua;
         this.TongTien = TongTien;
     }
 
-    public int getMaHD() {
+    public String getTenKH() {
+        return tenKH;
+    }
+
+    public void setTenKH(String tenKH) {
+        this.tenKH = tenKH;
+    }
+
+    public String getTenSP() {
+        return tenSP;
+    }
+
+    public void setTenSP(String tenSP) {
+        this.tenSP = tenSP;
+    }
+
+    public String getMaHD() {
         return maHD;
     }
 
-    public void setMaHD(int maHD) {
+    public void setMaHD(String maHD) {
         this.maHD = maHD;
-    }
-
-    public static int getsId() {
-        return sId;
-    }
-
-    public static void setsId(int sId) {
-        HoaDon.sId = sId;
     }
 
     public String getMaKH() {
@@ -71,6 +82,14 @@ public class HoaDon {
 
     public void setMaSP(String maSP) {
         this.maSP = maSP;
+    }
+
+    public int getSoLuongMua() {
+        return soLuongMua;
+    }
+
+    public void setSoLuongMua(int soLuongMua) {
+        this.soLuongMua = soLuongMua;
     }
 
     public int getTongTien() {

@@ -23,6 +23,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.DatHang;
 import model.SanPham;
 
 /**
@@ -189,6 +190,15 @@ public class ControllerImp {
                     return -1;
                 }
                 return 0;
+            }
+        });
+    }
+
+    public void sortByMaDH(List<DatHang> listDH) {
+        listDH.sort(new Comparator<DatHang>() {
+            @Override
+            public int compare(DatHang o1, DatHang o2) {
+                return o1.getMaHD().compareTo(o2.getMaHD());
             }
         });
     }

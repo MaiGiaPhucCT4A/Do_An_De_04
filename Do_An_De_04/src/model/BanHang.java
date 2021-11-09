@@ -15,7 +15,6 @@ import java.util.List;
 public class BanHang {
 
     private String maHD;
-    private Date ngayLapHoaDon;
     private String maSP;
     private String tenSP;
     private int soluongMua;
@@ -25,13 +24,24 @@ public class BanHang {
 
     }
 
-    public BanHang(String maHD, Date ngayLapHoaDon, String maSP, int soluongMua, int TongTien) {
+    public BanHang(String maHD, String maSP, String tenSP, int soluongMua, int TongTien) {
         this.maHD = maHD;
-        this.ngayLapHoaDon = ngayLapHoaDon;
         this.maSP = maSP;
+        this.tenSP = tenSP;
         this.soluongMua = soluongMua;
         this.TongTien = TongTien;
     }
+
+    
+
+//    public BanHang(String maHD, String maSP, String tenSP, int soluongMua, int TongTien) {
+//        this.maHD = maHD;
+//        this.ngayLapHoaDon = ngayLapHoaDon;
+//        this.maSP = maSP;
+//        this.tenSP = tenSP;
+//        this.soluongMua = soluongMua;
+//        this.TongTien = TongTien;
+//    }
 
     public String getTenSP() {
         return tenSP;
@@ -40,7 +50,6 @@ public class BanHang {
     public void setTenSP(String tenSP) {
         this.tenSP = tenSP;
     }
-    
 
     public String getMaHD() {
         return maHD;
@@ -50,13 +59,13 @@ public class BanHang {
         this.maHD = maHD;
     }
 
-    public Date getNgayLapHoaDon() {
-        return ngayLapHoaDon;
-    }
-
-    public void setNgayLapHoaDon(Date ngayLapHoaDon) {
-        this.ngayLapHoaDon = ngayLapHoaDon;
-    }
+//    public Date getNgayLapHoaDon() {
+//        return ngayLapHoaDon;
+//    }
+//
+//    public void setNgayLapHoaDon(Date ngayLapHoaDon) {
+//        this.ngayLapHoaDon = ngayLapHoaDon;
+//    }
 
     public String getMaSP() {
         return maSP;
