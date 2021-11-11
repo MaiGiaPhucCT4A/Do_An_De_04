@@ -153,4 +153,16 @@ public class KhachHang_Dao {
             Logger.getLogger(KhachHang_Dao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void delectKH(JComboBox<String> cbx_maKH) {
+        String sql = "delete from KhachHang where MaKH = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, cbx_maKH.getSelectedItem().toString());
+            cbx_maKH.removeItemAt(cbx_maKH.getSelectedIndex());
+            int n = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(KhachHang_Dao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

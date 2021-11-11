@@ -457,10 +457,14 @@ public class BanHangJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_combo_TENSP_BHPopupMenuWillBecomeInvisible
 
     private void txt_slNhap_BHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_slNhap_BHKeyReleased
-        int soluong = Integer.parseInt(txt_slNhap_BH.getText());
-        int giaBan = Integer.parseInt(txt_GIATIEN_BH.getText());
-        int TongTien = 0;
-        TongTien = giaBan * Integer.parseInt(txt_slNhap_BH.getText());
+        int soluong, giaBan, TongTien = 0;
+        try {
+            soluong = Integer.parseInt(txt_slNhap_BH.getText());
+            giaBan = Integer.parseInt(txt_GIATIEN_BH.getText());
+            TongTien = giaBan * Integer.parseInt(txt_slNhap_BH.getText());
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }
         txt_TONGTIEN_BH.setText(String.valueOf(TongTien));
     }//GEN-LAST:event_txt_slNhap_BHKeyReleased
 
@@ -492,27 +496,22 @@ public class BanHangJDialog extends javax.swing.JDialog {
 
     private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
 
-        String maSP, maHD, tenSP;
+        String maSP = null, maHD = null, tenSP = null;
         int soluong, TongSL;
         int giaBan, TongTien;
-
-        maSP = combo_MASP.getSelectedItem().toString();
-        if (maSP.equals("")) {
-            JOptionPane.showMessageDialog(rootPane, "Mã sản phẩm trống!Xin nhập lại");
-            return;
-        }
-        maHD = txt_MaHD_BH.getText();
-        if (maHD.equals("")) {
-            JOptionPane.showMessageDialog(rootPane, "Mã hóa đơn trống!Xin nhập lại");
-            return;
-        }
-        tenSP = combo_TENSP_BH.getSelectedItem().toString();
-
-        TongSL = Integer.parseInt(txt_TONGSOLUONG_BH.getText());
         try {
+            maSP = combo_MASP.getSelectedItem().toString();
+            maHD = txt_MaHD_BH.getText();
+            tenSP = combo_TENSP_BH.getSelectedItem().toString();
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(rootPane, "Xin nhập lại!!");
+        }
+
+        try {
+            TongSL = Integer.parseInt(txt_TONGSOLUONG_BH.getText());
             soluong = Integer.parseInt(txt_slNhap_BH.getText());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Số lượng phải là số");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "Xin nhập số lượng");
             return;
         }
         if (soluong > TongSL) {
@@ -557,15 +556,18 @@ public class BanHangJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_txt_TienDuKeyReleased
 
     private void txt_TienNhanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_TienNhanKeyReleased
+        float tienNhan, tongHD, tienDu;
+        int tienDu_Real = 0;
         String money = txt_TienNhan.getText();
         String summoney = txt_TongHoaDon.getText();
-        float tienNhan = Float.parseFloat(money);
-        float tongHD = Float.parseFloat(summoney);
-        float tienDu = tienNhan - tongHD;
-        int tienDu_Real = (int) (tienDu);
-//        if (tienDu < 0) {
-//            JOptionPane.showMessageDialog(rootPane, "Số tiền quý khách trả không đủ");
-//        }
+        try {
+            tienNhan = Float.parseFloat(money);
+            tongHD = Float.parseFloat(summoney);
+            tienDu = tienNhan - tongHD;
+            tienDu_Real = (int) (tienDu);
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }
         txt_TienDu.setText(String.valueOf(tienDu_Real));
     }//GEN-LAST:event_txt_TienNhanKeyReleased
 
@@ -624,15 +626,13 @@ public class BanHangJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton32ActionPerformed
 
     private void jButton35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton35ActionPerformed
+        int tonghd, tiennhan;
         String mahd = txt_MaHD_BH.getText();
-        int tonghd = Integer.parseInt(txt_TongHoaDon.getText());
-        if (txt_TongHoaDon.getText().equals("")) {
-            JOptionPane.showMessageDialog(rootPane, "Hãy tính tổng tiền hóa đơn");
-            return;
-        }
-        int tiennhan = Integer.parseInt(txt_TienNhan.getText());
-        if (txt_TienNhan.getText().length() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "Hãy nhập tiền thu của khách");
+        try {
+            tonghd = Integer.parseInt(txt_TongHoaDon.getText());
+            tiennhan = Integer.parseInt(txt_TienNhan.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "Hãy điền đẩy đủ thông tin vào ô trống");
             return;
         }
         String tien_du = txt_TienDu.getText();

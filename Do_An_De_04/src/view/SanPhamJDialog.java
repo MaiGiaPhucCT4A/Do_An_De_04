@@ -7,7 +7,10 @@ package view;
 
 import controller.ControllerImp;
 import controller.SanPham_DAO;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,7 +21,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.SanPham;
@@ -143,6 +148,11 @@ public class SanPhamJDialog extends javax.swing.JDialog {
 
         btnExport.setIcon(new javax.swing.ImageIcon("E:\\QUAN_LY_LINH_KIEN\\Quan_Ly_LinhKien\\src\\Image\\Print Sale.png")); // NOI18N
         btnExport.setText("IN DANH SÁCH");
+        btnExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportActionPerformed(evt);
+            }
+        });
 
         btnRefresh_Update.setIcon(new javax.swing.ImageIcon("E:\\QUAN_LY_LINH_KIEN\\Quan_Ly_LinhKien\\src\\Image\\Refresh-icon.png")); // NOI18N
         btnRefresh_Update.setText("REFRESH");
@@ -391,7 +401,6 @@ public class SanPhamJDialog extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txt_UpdateLoaiSP)
                         .addGap(12, 12, 12)))
-                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(397, Short.MAX_VALUE))
         );
@@ -823,6 +832,42 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         new SanPham_DAO().Update_LoaiSP(sp);
         JOptionPane.showMessageDialog(rootPane, "Thêm Loại Sản Phẩm Thành Công");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
+        exportFile(tblSanPham, modelSP);
+    }//GEN-LAST:event_btnExportActionPerformed
+
+    public void exportFile(JTable table, DefaultTableModel model) {
+        JFileChooser chooser = new JFileChooser();
+        int i = chooser.showSaveDialog(chooser);// hiển thị cửa sổ lưu
+        if (i == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            try {
+                FileWriter output = new FileWriter(file + ".xls");
+                BufferedWriter bw = new BufferedWriter(output);
+                //modelSV = (DefaultTableModel) tblSinhVien.getModel();
+                model = (DefaultTableModel) table.getModel();
+                // ten cot
+                for (int j = 0; j < table.getColumnCount(); j++) {
+                    bw.write(model.getColumnName(j) + "\t");
+                }
+                bw.write("\n");
+                // lay du lieu dong
+                for (int j = 0; j < table.getRowCount(); j++) {
+                    for (int k = 0; k < table.getColumnCount(); k++) {
+                        bw.write(model.getValueAt(j, k) + "\t");
+                    }
+                    bw.write("\n");
+                }
+                bw.close();
+                JOptionPane.showMessageDialog(null, "Lưu file thành công!");
+            } catch (IOException ex) {
+                Logger.getLogger(SanPhamJDialog.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Lỗi khi lưu file!");
+            }
+        }
+
+    }
 
     /**
      * @param args the command line arguments

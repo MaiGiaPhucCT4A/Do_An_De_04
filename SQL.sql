@@ -2,21 +2,25 @@
 use Do_An_De_04
 
 select * from SanPham
+update sanpham set LoaiSP = N'Đồ uống' where TenSP like N'sữa %'
 
+select * from LoaiSanPham
+delete from loaiSanPham where loaisp=N'Dầu gội'
 create table LoaiSanPham
 (
 	LoaiSP nvarchar(50)
-)s
+)
+insert into LoaiSanPham values (N'Thực phẩm khô')
 
 select distinct LoaiSP from SanPham
 
 select * from DonDatHang order by MaHD desc
 --select * from BanHang
 --select * from KhachHang
-select * from DoanhThu order by MaHD
+
 select distinct maHD from MaDonHang
 select distinct maHD from MaBanHang
-delete from mabanhang where mahd = 'HD3'
+delete from mabanhang where mahd = ''
 delete from DonDatHang where MaHD = 'DH10'
 select distinct maHD from DonDatHang order by MaHD
 
@@ -31,12 +35,13 @@ create table MaDonHang
 (
 	MaHD varchar(10)
 )
-
+delete from MaBanHang
+delete from MaDonHang
 create table MaBanHang
 (
 	MaHD varchar(10)
 )
-
+select * from MaBanHang
 
 create table 
 
@@ -112,6 +117,7 @@ create table DoanhThu
 )
 insert into DoanhThu(MaHD,NgayDat,MaSP,TenSP,SoLuongMua) values ()
 select * from DoanhThu
+drop table DoanhThu
 delete from DoanhThu
 --DONDATHANG
 create table DonDatHang

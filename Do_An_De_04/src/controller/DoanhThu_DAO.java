@@ -94,11 +94,24 @@ public class DoanhThu_DAO {
         }
         return listDT;
     }
-    static int dem = 0;
 
-    static void td(int dem) {
-        dem = 7;
-        dem += 2;
-        System.out.println(dem);
+    public List<DoanhThu> getListSearch_DoanhThu(java.util.Date ngay1, java.util.Date ngay2, List<DoanhThu> listDT) {
+        String sql = "select * from DoanhThu where NgayBan between '" + ngay1 + "' and '" + ngay2 + "'";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                DoanhThu dt = new DoanhThu();
+                dt.setMaHD(rs.getString(1));
+                dt.setNgayDat(rs.getDate(2));
+                dt.setTongTienThu(rs.getInt(3));
+                dt.setTienNhan(rs.getInt(4));
+                dt.setTienDu(rs.getInt(5));
+                listDT.add(dt);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DoanhThu_DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listDT;
     }
 }

@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -18,6 +19,7 @@ public class DoanhThu {
     private int TongTienThu;
     private int TienNhan;
     private int TienDu;
+    private LocalDateTime Ngay_GioBan;
 
     public DoanhThu() {
     }
@@ -82,6 +84,14 @@ public class DoanhThu {
 
     public void setTienNhan(int TienNhan) {
         this.TienNhan = TienNhan;
+    }
+
+    public LocalDateTime getNgay_GioBan() {
+        return Ngay_GioBan;
+    }
+
+    public void setNgay_GioBan(LocalDateTime Ngay_GioBan) {
+        this.Ngay_GioBan = Ngay_GioBan;
     }
 
 }
