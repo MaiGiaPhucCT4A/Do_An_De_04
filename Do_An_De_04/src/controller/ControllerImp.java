@@ -19,6 +19,7 @@ import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
@@ -181,7 +182,8 @@ public class ControllerImp {
     }
 
     public void sortByMoney_DEC(List<SanPham> listSP) {
-        listSP.sort(new Comparator<SanPham>() {
+        //c1:
+        Collections.sort(listSP, new Comparator<SanPham>() {
             @Override
             public int compare(SanPham o1, SanPham o2) {
                 if (o1.getGiaBan() < o2.getGiaBan()) {
@@ -192,6 +194,18 @@ public class ControllerImp {
                 return 0;
             }
         });
+        //c2:
+//        listSP.sort(new Comparator<SanPham>() {
+//            @Override
+//            public int compare(SanPham o1, SanPham o2) {
+//                if (o1.getGiaBan() < o2.getGiaBan()) {
+//                    return 1;
+//                } else if (o1.getGiaBan() > o2.getGiaBan()) {
+//                    return -1;
+//                }
+//                return 0;
+//            }
+//        });
     }
 
     public void sortByMaDH(List<DatHang> listDH) {

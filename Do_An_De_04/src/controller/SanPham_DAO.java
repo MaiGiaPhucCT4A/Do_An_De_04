@@ -308,6 +308,21 @@ public class SanPham_DAO {
         }
     }
 
+    public void Update_NhaSX(SanPham sp) {
+        String sql = "insert into NhaSanXuat values (?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, sp.getNhaSanXuat());
+
+            int n = ps.executeUpdate();// update data
+        } catch (SQLException ex) {
+            System.out.println("Lỗi: " + ex);
+            Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException n) {
+            System.out.println("Lỗi: " + n);
+        }
+    }
+
     public void initComboBox_LoaiSanPham(JComboBox<String> combo_LoaiSP) {
         String sql = "select distinct LoaiSP from LoaiSanPham";
         try {
@@ -320,6 +335,22 @@ public class SanPham_DAO {
         } catch (SQLException ex) {
             Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(combo_LoaiSP, ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    public void initComboBox_NhaSX(JComboBox<String> combo_NhaSX) {
+        String sql = "select distinct NhaSX from NhaSanXuat";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            combo_NhaSX.removeAllItems();
+            while (rs.next()) {
+                combo_NhaSX.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPham_DAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(combo_NhaSX, ex.getMessage());
             ex.printStackTrace();
         }
     }

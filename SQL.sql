@@ -11,6 +11,12 @@ create table LoaiSanPham
 	LoaiSP nvarchar(50)
 )
 insert into LoaiSanPham values (N'Thực phẩm khô')
+select * from NhaSanXuat
+insert into NhaSanXuat values (N'Pepsi'),(N'Coca'),(N'Vinamilk'),(N'Tường An'),(N'Thorakao'),(N'Pantene'),(N'Clear'),(N'X-Men')
+CREATE TABLE NhaSanXuat
+(
+	NhaSX nvarchar(50) not null,
+)
 
 select distinct LoaiSP from SanPham
 
@@ -43,19 +49,6 @@ create table MaBanHang
 )
 select * from MaBanHang
 
-create table 
-
---NHANVIEN(MaNV, Hoten, DiaChi, SDT, NgaySinh, GT, Luong) 
-	create table NhanVien
-	(
-		MaNV varchar(10) primary key, 
-		Hoten nvarchar(50) not null, 
-		DiaChi nvarchar(50) not null, 
-		SDT varchar(12) unique, 
-		NgaySinh date check (ngaysinh<getdate()) not null , 
-		GT nvarchar(3) not null, 
-		Luong int not null
-	)
 --SANPHAM(MaSP, TenSP, NSX, HSD, LoaiSP, SoLuong, GiaBan) 
 
 	CREATE TABLE SanPham
@@ -115,6 +108,10 @@ create table DoanhThu
 	TienNhan int,
 	TienDu int
 )
+
+select * from DoanhThu where NgayBan between '2021/11/11' and '2021/11/11'
+
+ ALTER TABLE DoanhThu  ALTER COLUMN  NgayBan date
 insert into DoanhThu(MaHD,NgayDat,MaSP,TenSP,SoLuongMua) values ()
 select * from DoanhThu
 drop table DoanhThu

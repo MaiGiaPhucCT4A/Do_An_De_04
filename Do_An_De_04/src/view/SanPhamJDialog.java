@@ -54,6 +54,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         ListSP = new SanPham_DAO().getListSanPham();
         modelSP = (DefaultTableModel) tblSanPham.getModel();
         new SanPham_DAO().initComboBox_LoaiSanPham(comboLoaiSP);
+        new SanPham_DAO().initComboBox_NhaSX(combo_NhaSX);
         showSanPham();
     }
 
@@ -104,6 +105,10 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txt_UpdateNhaSX = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -407,15 +412,53 @@ public class SanPhamJDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Cập Nhật Loại Sản Phẩm", jPanel2);
 
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel12.setText("CẬP NHẬT NHÀ SẢN XUẤT");
+
+        jLabel13.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel13.setText("NHÀ SẢN XUẤT");
+
+        jButton2.setIcon(new javax.swing.ImageIcon("E:\\QUAN_LY_LINH_KIEN\\Quan_Ly_LinhKien\\src\\Image\\Add.png")); // NOI18N
+        jButton2.setText("THÊM");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1140, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(402, 402, 402)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(445, 445, 445)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(360, 360, 360)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_UpdateNhaSX, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)))
+                .addContainerGap(486, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 542, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_UpdateNhaSX, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(394, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cập Nhật Nhà Sản Xuất", jPanel3);
@@ -790,6 +833,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         ListSP.clear();
         ListSP.addAll(new SanPham_DAO().getListSanPham());
         new SanPham_DAO().initComboBox_LoaiSanPham(comboLoaiSP);
+        new SanPham_DAO().initComboBox_NhaSX(combo_NhaSX);
         showSanPham();
     }//GEN-LAST:event_btnRefresh_UpdateActionPerformed
 
@@ -836,6 +880,14 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
         exportFile(tblSanPham, modelSP);
     }//GEN-LAST:event_btnExportActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        SanPham sp = new SanPham();
+        String nhasx = txt_UpdateNhaSX.getText();
+        sp.setNhaSanXuat(nhasx);
+        new SanPham_DAO().Update_NhaSX(sp);
+        JOptionPane.showMessageDialog(rootPane, "Thêm Nhà Sản Xuất Thành Công");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public void exportFile(JTable table, DefaultTableModel model) {
         JFileChooser chooser = new JFileChooser();
@@ -924,10 +976,13 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> combo_DonViTinh;
     private javax.swing.JComboBox<String> combo_NhaSX;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -951,6 +1006,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txt_GiaBan;
     private javax.swing.JTextField txt_GiaNhap;
     private javax.swing.JTextField txt_UpdateLoaiSP;
+    private javax.swing.JTextField txt_UpdateNhaSX;
     // End of variables declaration//GEN-END:variables
 
     private void showSanPham() {
